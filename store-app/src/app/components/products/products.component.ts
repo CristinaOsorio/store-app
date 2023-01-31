@@ -51,8 +51,15 @@ export class ProductsComponent implements OnInit {
         'https://static.platzi.com/media/user_upload/glasses-05350737-5831-4c98-be55-824399206dba.jpg',
     },
   ];
+  shoppingCart: Product[] = [];
+  total = 0;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  onAddToShoppingCart(product: Product) {
+    this.shoppingCart.push(product);
+    this.total = this.shoppingCart.reduce((sum, item) => sum + item.price, 0);
+  }
 }
