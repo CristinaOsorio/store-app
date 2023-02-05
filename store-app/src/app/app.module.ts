@@ -8,6 +8,7 @@ import { ImgComponent } from './components/img/img.component';
 import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from './components/products/products.component';
 import { NavComponent } from './components/nav/nav.component';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NavComponent } from './components/nav/nav.component';
     ImgComponent,
     ProductsComponent,
     NavComponent,
+    TimeAgoPipe,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule],
   providers: [],

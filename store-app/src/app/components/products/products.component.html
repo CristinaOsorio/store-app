@@ -1,5 +1,6 @@
 <p>Los productos agregados son: {{ shoppingCart.length }}</p>
-<p>Total: {{ total }}</p>
+<p>Total: {{ total | currency : "$ " }}</p>
+<p>Today: {{ date | timeAgo }}</p>
 <div class="products--grid">
   <app-product
     *ngFor="let product of products"
