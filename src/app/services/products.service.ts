@@ -8,7 +8,7 @@ import { Product } from './../models/product.models';
   providedIn: 'root',
 })
 export class ProductsService {
-  private api = 'https://fakestoreapi.com';
+  private api = 'https://young-sands-07814.herokuapp.com/api';
 
   constructor(private http: HttpClient) {}
 
