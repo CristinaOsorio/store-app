@@ -1,3 +1,6 @@
+<div>
+  <button (click)="createNewProduct()" href="">Create Product</button>
+</div>
 <div class="products--grid">
   <app-product
     *ngFor="let product of products"
@@ -27,5 +30,6 @@
     <p>
       <strong>{{ productChosen.price | currency : "$ " }}</strong>
     </p>
+    <button (click)="updateProduct()" href="">Updated Product</button>
   </div>
 </div>
