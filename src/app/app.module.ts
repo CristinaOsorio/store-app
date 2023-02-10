@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
+import { SwiperModule } from 'swiper/angular';
+
 import { AppComponent } from './app.component';
 import { ProductComponent } from './components/product/product.component';
 import { ImgComponent } from './components/img/img.component';
@@ -19,7 +21,7 @@ import { TimeAgoPipe } from './pipes/time-ago.pipe';
     NavComponent,
     TimeAgoPipe,
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, SwiperModule],
   providers: [],
   bootstrap: [AppComponent],
 })

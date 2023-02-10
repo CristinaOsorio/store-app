@@ -13,6 +13,7 @@ export class ProductsComponent implements OnInit {
   total = 0;
   date = new Date(2023, 1, 1);
   showProductDetail = false;
+  productChosen!: Product;
 
   constructor(
     private storeService: StoreService,
@@ -36,8 +37,7 @@ export class ProductsComponent implements OnInit {
   }
 
   onShowDetailsProduct(product: Product) {
-    console.log(product);
-
+    this.productChosen = product;
     this.toggleProductDetail();
   }
 }

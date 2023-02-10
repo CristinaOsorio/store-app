@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
 @import url(./styles/reset.scss);
+@import url(./../node_modules/swiper/swiper.scss);
+@import "~swiper/swiper.min.css";
+@import "~swiper/modules/navigation/navigation.min.css";
+@import "~swiper/modules/pagination/pagination.min.css";
 
 * {
   font-family: "Quicksand", sans-serif;
