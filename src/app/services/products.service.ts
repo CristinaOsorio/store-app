@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -18,6 +18,15 @@ export class ProductsService {
 
   getProduct(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.api}/products/${id}`);
+  }
+
+  getProductByPage(offset?: number, limit?: number): Observable<Product[]> {
+    let params = new HttpParams();
+    if (limit && offset) {
+      params = params.set('limit', limit);
+      params = params.set('offset', offset);
+    }
+    return this.http.get<Product[]>(`${this.api}/products`, { params });
   }
 
   create(product: CreateProductDTO): Observable<Product> {

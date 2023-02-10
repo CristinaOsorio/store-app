@@ -15,6 +15,8 @@ export class ProductsComponent implements OnInit {
   date = new Date(2023, 1, 1);
   showProductDetail = false;
   productChosen!: Product;
+  offset: number = 0;
+  limit: number = 10;
 
   constructor(
     private storeService: StoreService,
@@ -22,10 +24,7 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productService.getAllProduct().subscribe((data) => {
-      this.products = data;
-    });
-    this.shoppingCart = this.storeService.shoppingCart;
+    this.loadMore();
   }
 
   onAddToShoppingCart(product: Product) {
@@ -80,5 +79,14 @@ export class ProductsComponent implements OnInit {
       this.products.splice(productIndex, 1);
       this.showProductDetail = false;
     });
+  }
+
+  loadMore(): void {
+    this.productService
+      .getProductByPage(this.offset, this.limit)
+      .subscribe((data) => {
+        this.products = this.products.concat(data);
+        this.offset += this.limit;
+      });
   }
 }
