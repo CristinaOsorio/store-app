@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { CreateProductDTO, Product, UpdateProductDTO } from './../models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  private api = '/api';
+  private api = `${environment.API_URL}/api`;
 
   constructor(private http: HttpClient) {}
 
