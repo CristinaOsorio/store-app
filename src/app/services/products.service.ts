@@ -5,7 +5,7 @@ import {
   HttpStatusCode,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 
 import { CreateProductDTO, Product, UpdateProductDTO } from './../models';
 import { environment } from 'src/environments/environment';
@@ -19,7 +19,13 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   getAllProduct(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.api}/products`);
+    return this.http
+      .get<Product[]>(`${this.api}/products`)
+      .pipe(
+        map((products) =>
+          products.map((item) => ({ ...item, taxes: 0.16 * item.price }))
+        )
+      );
   }
 
   getProduct(id: number): Observable<Product> {
