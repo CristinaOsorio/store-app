@@ -1,6 +1,11 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+  HttpStatusCode,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 import { CreateProductDTO, Product, UpdateProductDTO } from './../models';
 import { environment } from 'src/environments/environment';
@@ -18,7 +23,20 @@ export class ProductsService {
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.api}/products/${id}`);
+    return this.http.get<Product>(`${this.api}/products/${id}`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === HttpStatusCode.NotFound) {
+          return throwError('El producto no ha sido encontrado.');
+        }
+        if (error.status === HttpStatusCode.Conflict) {
+          return throwError('Error en el servidor.');
+        }
+        if (error.status === HttpStatusCode.Unauthorized) {
+          return throwError('No autorizado.');
+        }
+        return throwError('Ups...');
+      })
+    );
   }
 
   getProductByPage(offset?: number, limit?: number): Observable<Product[]> {
