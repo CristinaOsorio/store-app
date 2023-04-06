@@ -5,7 +5,7 @@ import {
   HttpStatusCode,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, throwError } from 'rxjs';
+import { Observable, catchError, map, switchMap, throwError, zip } from 'rxjs';
 
 import { CreateProductDTO, Product, UpdateProductDTO } from './../models';
 import { environment } from 'src/environments/environment';
@@ -42,6 +42,25 @@ export class ProductsService {
         }
         return throwError('Ups...');
       })
+    );
+  }
+
+  readAndUpdate(id: number, title: string) {
+    this.getProduct(id)
+      .pipe(
+        switchMap((product) =>
+          this.update(product.id, {
+            title,
+          })
+        )
+      )
+      .subscribe((data) => console.log(data));
+
+    zip(this.getProduct(id), this.update(id, { title })).subscribe(
+      (response) => {
+        const [read, updated] = response;
+        console.log(read, updated);
+      }
     );
   }
 
